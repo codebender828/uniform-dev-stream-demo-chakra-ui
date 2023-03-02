@@ -28,7 +28,7 @@
         <c-stack spacing="5">
           <c-heading>Popover</c-heading>
           <c-stack spacing="4" align="flex-start">
-            <EPopover />
+            <Popover />
           </c-stack>
         </c-stack>
       </c-simple-grid>
@@ -54,7 +54,7 @@
 
 <script setup lang="ts">
 import { chakra, useColorMode, useColorModeValue } from "@chakra-ui/vue-next";
-import { EPopover } from "./components/popover";
+import { Popover } from "./components/popover";
 
 const { toggleColorMode } = useColorMode();
 </script>

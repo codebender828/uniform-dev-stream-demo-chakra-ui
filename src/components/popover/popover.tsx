@@ -12,7 +12,7 @@ import { CButton } from "@chakra-ui/vue-next";
 
 const Popover = defineComponent({
   name: "EPopover",
-  setup(_, { slots }) {
+  setup() {
     const styles = useMultiStyleConfig("Popover", {});
 
     const [state, send] = useMachine(
