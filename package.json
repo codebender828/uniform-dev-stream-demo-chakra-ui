@@ -18,6 +18,8 @@
     "@fontsource/dm-sans": "^4.5.9",
     "@fontsource/ibm-plex-mono": "^4.5.13",
     "@vueuse/core": "^9.13.0",
+    "@zag-js/popover": "^0.2.13",
+    "@zag-js/vue": "^0.2.10",
     "alchemy-sdk": "^2.4.3",
     "unplugin-vue-components": "^0.24.0",
     "vue": "^3.2.45"

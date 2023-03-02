@@ -1,8 +1,8 @@
 export const semanticTokens = {
   colors: {
     bg: {
-      default: "velvet.50",
-      _dark: "velvet.900",
+      default: "gray.50",
+      _dark: "gray.900",
     },
   },
 };

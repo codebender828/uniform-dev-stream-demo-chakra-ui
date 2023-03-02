@@ -1,164 +1,60 @@
 <template>
   <chakra.div
-    :bg="
-      useColorModeValue(
-        `${selectedColor.color}.50`,
-        `${selectedColor.color}.900`
-      ).value
-    "
     min-h="100vh"
+    bg="bg"
     transition="background-color 0.2s ease-in-out"
     layer-style="home.container"
   >
-    <c-stack spacing="8" align-items="flex-start">
-      <c-stack
-        :color="
-          useColorModeValue(
-            `${selectedColor.color}.900`,
-            `${selectedColor.color}.50`
-          ).value
-        "
-      >
-        <c-heading text-style="home.subheading"> Welcome to </c-heading>
-        <c-heading as="h1" text-style="home.heading"> Chakra UI Vue </c-heading>
-        <chakra.h4
-          font-weight="bold"
-          :font-size="['xl', '2xl', '3xl']"
-          display="flex"
-          :flex-direction="['column', 'column', 'row']"
-          :align-items="['flex-start', 'flex-start', 'center']"
-        >
-          <chakra.span
-            >Build Beautiful Accessible Components - Powered by</chakra.span
-          >
-          &nbsp;
-          <chakra.a
-            text-decoration="underline"
-            text-decoration-style="dashed"
-            cursor="pointer"
-            href="https://nuxt.com"
-            target="_blank"
-            display="inline-flex"
-            justify-content="flex-start"
-            align-items="center"
-          >
-            <VueLogo h="1em" d="inline-flex" />
-            <ExternalLinkIcon />
-          </chakra.a>
-        </chakra.h4>
-      </c-stack>
-      <c-wrap
-        :bg="useColorModeValue('blackAlpha.50', 'whiteAlpha.50').value"
-        :px="[5, 3]"
-        :py="[4, 3]"
-        :rounded="{ base: '2xl', md: '2xl', lg: 'full' }"
-        spacing="3"
-      >
-        <c-wrap-item v-for="color in colors" :key="color">
-          <c-circle
-            box-size="8"
-            :bg="`${color}.400`"
-            cursor="pointer"
-            :_hover="{
-              bg: `${color}.500`,
-              transform: 'scale(1.1)',
-              transition: 'all 0.2s',
-            }"
-            @mouseenter="selectedColor.color = color"
-          />
-        </c-wrap-item>
-      </c-wrap>
-      <c-badge
-        :color-scheme="selectedColor.color"
-        text-transform="unset"
-        :px="[5, 2]"
-        :py="[4, 1]"
-        font-size="md"
-        :rounded="{ base: '2xl', md: '2xl', lg: 'full' }"
-        white-space="break-spaces"
-      >
-        Chakra UI Vue is currently still in early beta. Explore the
-        documentation and join our Discord!
-      </c-badge>
-      <c-wrap spacing="5" :color-scheme="selectedColor.color">
-        <c-wrap-item>
-          <c-button
-            size="lg"
-            :color-scheme="selectedColor.color"
-            :right-icon="ExternalLinkIcon"
-          >
-            Get Started
-          </c-button>
-        </c-wrap-item>
-        <c-wrap-item>
-          <c-link
-            href="https://github.com/codebender828/chakra-vue-v1-demo#readme"
-          >
-            <c-button
-              size="lg"
-              :color-scheme="selectedColor.color"
-              :right-icon="DocumentationIcon"
-              variant="outline"
-            >
-              Documentation
-            </c-button>
-          </c-link>
-        </c-wrap-item>
-      </c-wrap>
-      <c-button-group :color-scheme="selectedColor.color" variant="outline">
-        <c-icon-button
-          aria-label="Toggle color mode"
-          :icon="useColorModeValue('moon', 'sun').value"
-          @click="changeColorMode"
-          rounded="none"
-        />
-        <c-icon-button
-          as="a"
-          href="https://nuxt.com"
-          target="_blank"
-          aria-label="Join Discord"
-          rounded="none"
-        >
-          <DiscordIcon />
-        </c-icon-button>
-      </c-button-group>
-    </c-stack>
+    <c-center h="full" w="full">
+      <c-simple-grid template-columns="1fr 1fr" gap="5">
+        <c-stack spacing="5">
+          <c-heading>Primary Buttons</c-heading>
+          <c-stack align="flex-start" spacing="4">
+            <c-button size="lg">Large Button</c-button>
+            <c-button size="md">Medium Button</c-button>
+            <c-button size="sm">Small Button</c-button>
+            <c-button size="xs">Tiny Button</c-button>
+          </c-stack>
+        </c-stack>
+        <c-stack spacing="5">
+          <c-heading>Secondary Buttons</c-heading>
+          <c-stack spacing="4" align="flex-start">
+            <c-button variant="secondary" size="lg">Large Button</c-button>
+            <c-button variant="secondary" size="md">Medium Button</c-button>
+            <c-button variant="secondary" size="sm">Small Button</c-button>
+            <c-button variant="secondary" size="xs">Tiny Button</c-button>
+          </c-stack>
+        </c-stack>
+        <c-stack spacing="5">
+          <c-heading>Popover</c-heading>
+          <c-stack spacing="4" align="flex-start">
+            <EPopover />
+          </c-stack>
+        </c-stack>
+      </c-simple-grid>
+      <!-- 
+        Popover compoennt
+       -->
+      <!-- <EPopover> Hello Popover </EPopover> -->
+    </c-center>
+    <c-icon-button
+      color-scheme="velvet"
+      variant="outline"
+      position="absolute"
+      top="4"
+      right="4"
+      :aria-label="
+        useColorModeValue(`Switch to dark mode`, `Switch to light mode`).value
+      "
+      :icon="useColorModeValue('moon', 'sun').value"
+      @click="toggleColorMode"
+    />
   </chakra.div>
 </template>
 
 <script setup lang="ts">
-import {
-  chakra,
-  useColorMode,
-  useColorModeValue,
-  useTheme,
-} from "@chakra-ui/vue-next";
-import { computed } from "vue";
-import { useStorage } from "@vueuse/core";
-import DocumentationIcon from "./components/icons/documentation-icon";
-import ExternalLinkIcon from "./components/icons/external-link";
-import DiscordIcon from "./components/icons/discord-icon";
-import VueLogo from "./components/icons/vue-logo";
+import { chakra, useColorMode, useColorModeValue } from "@chakra-ui/vue-next";
+import { EPopover } from "./components/popover";
 
 const { toggleColorMode } = useColorMode();
-
-const themeConfig = {
-  color: "whatsapp",
-};
-const selectedColor = useStorage("theme.color", themeConfig);
-
-const theme = useTheme();
-
-const colors = computed(
-  () =>
-    new Set(
-      Object.keys(theme.colors!)
-        .filter((color) => typeof theme.colors![color] === "object")
-        .filter((color) => !["blackAlpha", "whiteAlpha"].includes(color))
-    )
-);
-
-function changeColorMode() {
-  toggleColorMode();
-}
 </script>
